@@ -21,10 +21,11 @@
   |text        |text   |null: false      |
   |user_id     |integer|foreign_key: true|
   |condition_id|integer|foreign_key: true|
-  |charges_id  |integer|foreign_key: true|
+  |charge_id  |integer|foreign_key: true|
   |source_id   |integer|foreign_key: true|
-  |days_id     |integer|foreign_key: true|
+  |ship_day_id |integer|foreign_key: true|
   |category_id |integer|foreign_key: true|
+  |price       |integer|null: false|
 ### Association
   belongs_to :user
   has_one :buyer
@@ -38,14 +39,14 @@
 ### Association
   belongs_to :user
   belongs_to :buyer
-  has_one :addresses
+  has_one :address
 
 
 ## addressesテーブル
   |Column       |Type   |Options          |
   |-------------|-------|-----------------|
   |postal_code  |string |null: false      |
-  |source_id    |string |null: false      |
+  |source_id    |integer|null: false      |
   |municipality |string |null: false      |
   |address      |string |null: false      |
   |building_name|string |                 |
