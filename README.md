@@ -2,7 +2,7 @@
   |Column                |Type    |Options     |
   |----------------------|--------|------------|
   |nickname              |string  |null: false |
-  |email                 |string  |unique: true|
+  |email                 |string  |null: false,unique: true|
   |encrypted_password    |string  |null: false |
   |last_name             |string  |null: false |
   |first_name            |string  |null: false |
@@ -45,7 +45,7 @@
   |Column       |Type   |Options          |
   |-------------|-------|-----------------|
   |postal_code  |string |null: false      |
-  |prefectures  |string |null: false      |
+  |source_id    |string |null: false      |
   |municipality |string |null: false      |
   |address      |string |null: false      |
   |building_name|string |                 |
