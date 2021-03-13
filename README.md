@@ -15,27 +15,27 @@
 
 
 ## itemsテーブル
-  |Column      |Type   |Options          |
-  |------------|-------|-----------------|
-  |name        |string |null: false      |
-  |text        |text   |null: false      |
-  |user_id     |integer|foreign_key: true|
-  |condition_id|integer|foreign_key: true|
-  |charge_id  |integer|foreign_key: true|
-  |source_id   |integer|foreign_key: true|
-  |ship_day_id |integer|foreign_key: true|
-  |category_id |integer|foreign_key: true|
-  |price       |integer|null: false|
+  |Column      |Type       |Options         |
+  |------------|----------|-----------------|
+  |name        |string    |null: false      |
+  |text        |text      |null: false      |
+  |user        |references|foreign_key: true|
+  |condition_id|integer   |null: false      |
+  |charge_id   |integer   |null: false      |
+  |source_id   |integer   |null: false      |
+  |ship_day_id |integer   |null: false      |
+  |category_id |integer   |null: false      |
+  |price       |integer   |null: false      |
 ### Association
   belongs_to :user
   has_one :buyer
 
 
 ## buyersテーブル
-  |Column |Type   |Options          |
-  |-------|-------|-----------------|
-  |user_id|integer|foreign_key: true|
-  |item_id|integer|foreign_key: true|
+  |Column |Type      |Options          |
+  |-------|----------|-----------------|
+  |user   |references|foreign_key: true|
+  |item   |references|foreign_key: true|
 ### Association
   belongs_to :user
   belongs_to :buyer
