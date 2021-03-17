@@ -60,18 +60,29 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Price can't be blank", "Price is invalid", "Price is not included in the list")
       end
       it "priceが¥299以下の場合は保存できない" do
-        @item.price = '298'
+        @item.price = 299
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
       it "priceが¥10000000以上の場合は保存できない" do
-        @item.price = '10000001'
+        @item.price = 10000000
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
-      it "priceは半角数字以外は登録できない" do
-        @item.price = 'あア亜aA'
+      it "priceは全角文字では登録できない" do
+        @item.price = 'あああ'
         @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it "priceは半角英数混合では登録できない" do
+        @item.price = 'aA11'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it "priceは半角英語だけでは登録できない" do
+        @item.price = 'aaAA'
+        @item.valid?
+        binding.pry
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
       it 'userが紐付いていないと登録できない' do
