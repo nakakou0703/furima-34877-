@@ -1,0 +1,81 @@
+require 'rails_helper'
+
+RSpec.describe Item, type: :model do
+  before do
+    @item = FactoryBot.build(:item)
+  end
+
+  describe '商品情報登録' do
+
+    context '商品情報登録ができる時' do
+      it "image,name,text,category_id,condition_id,charge_id,source_id,ship_day_id,priceが記入されていれば登録できる" do
+        expect(@item).to be_valid
+      end
+    end
+
+    context '商品情報登録ができない時' do
+      it "imageが空だと登録できない" do
+        @item.image = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Image can't be blank")
+      end
+      it "nameが空だと登録できない" do
+        @item.name = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Name can't be blank")
+      end
+      it "textが空だと登録できない" do
+        @item.text = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Text can't be blank")
+      end
+      it "categoryが--だと登録できない" do
+        @item.category_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
+      end
+      it "conditionが--だと登録できない" do
+        @item.condition_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Condition can't be blank", "Condition is not a number")
+      end
+      it "chargeが--だと登録できない" do
+        @item.charge_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Charge can't be blank", "Charge is not a number")
+      end
+      it "ship_dayが--だと登録できない" do
+        @item.ship_day_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Ship day can't be blank", "Ship day is not a number")
+      end
+      it "sourceが--だと登録できない" do
+        @item.source_id = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Source can't be blank", "Source is not a number")
+      end
+      it "priceが空と登録できない" do
+        @item.price = ''
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price can't be blank", "Price is invalid", "Price is not included in the list")
+      end
+      it "priceは¥300~¥9999999以外では登録できない" do
+        @item.price = '00000'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it "priceは半角数字以外は登録できない" do
+        @item.price = 'あア亜aA'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it 'userが紐付いていないと登録できない' do
+        @item.user = nil
+        @item.valid?
+        expect(@item.errors.full_messages).to include("User must exist")
+      end
+
+    end
+
+  end
+end

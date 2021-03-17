@@ -56,7 +56,6 @@ RSpec.describe User, type: :model do
       it "passwordは数字のみでは登録できない" do
         @user.password = "000000"
         @user.valid?
-        binding.pry
         expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it 'passwordが存在してもpassword_confirmationが空では登録できない' do
