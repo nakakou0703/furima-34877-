@@ -30,27 +30,27 @@ RSpec.describe Item, type: :model do
         expect(@item.errors.full_messages).to include("Text can't be blank")
       end
       it "categoryが--だと登録できない" do
-        @item.category_id = nil
+        @item.category_id = [1]
         @item.valid?
         expect(@item.errors.full_messages).to include("Category can't be blank", "Category is not a number")
       end
       it "conditionが--だと登録できない" do
-        @item.condition_id = nil
+        @item.condition_id = [1]
         @item.valid?
         expect(@item.errors.full_messages).to include("Condition can't be blank", "Condition is not a number")
       end
       it "chargeが--だと登録できない" do
-        @item.charge_id = nil
+        @item.charge_id = [1]
         @item.valid?
         expect(@item.errors.full_messages).to include("Charge can't be blank", "Charge is not a number")
       end
       it "ship_dayが--だと登録できない" do
-        @item.ship_day_id = nil
+        @item.ship_day_id = [1]
         @item.valid?
         expect(@item.errors.full_messages).to include("Ship day can't be blank", "Ship day is not a number")
       end
       it "sourceが--だと登録できない" do
-        @item.source_id = nil
+        @item.source_id = [1]
         @item.valid?
         expect(@item.errors.full_messages).to include("Source can't be blank", "Source is not a number")
       end
@@ -59,8 +59,13 @@ RSpec.describe Item, type: :model do
         @item.valid?
         expect(@item.errors.full_messages).to include("Price can't be blank", "Price is invalid", "Price is not included in the list")
       end
-      it "priceは¥300~¥9999999以外では登録できない" do
-        @item.price = '00000'
+      it "priceが¥299以下の場合は保存できない" do
+        @item.price = '298'
+        @item.valid?
+        expect(@item.errors.full_messages).to include("Price is not included in the list")
+      end
+      it "priceが¥10000000以上の場合は保存できない" do
+        @item.price = '10000001'
         @item.valid?
         expect(@item.errors.full_messages).to include("Price is not included in the list")
       end
