@@ -11,9 +11,7 @@ class BuyerAddress
     validates :address
     validates :phone_number, format: {with: /\A\d{10,11}\z/}
     validates :token
-    #validates :buyer_id
   end
-    #validates :building_name 
 
   def save
     # 購入者情報を保存し、変数にbuyer代入

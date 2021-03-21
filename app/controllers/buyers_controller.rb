@@ -2,15 +2,13 @@ class BuyersController < ApplicationController
   before_action :authenticate_user!
   before_action :user_id
   before_action :sold_out 
+  before_action :item_find, only: [:index, :create]
 
   def index
-    # binding.pry
-    @item = Item.find(params[:item_id])
     @buyer_address = BuyerAddress.new
   end
 
   def create
-    @item = Item.find(params[:item_id])
     @buyer_address = BuyerAddress.new(buyer_params)
     if @buyer_address.valid?
       pay_item
@@ -48,5 +46,10 @@ class BuyersController < ApplicationController
       redirect_to root_path
     end
   end
+
+  def item_find
+    @item = Item.find(params[:item_id])
+  end
+  
 end
 
