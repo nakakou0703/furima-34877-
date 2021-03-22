@@ -22,7 +22,7 @@
         <%= @item.charge.name %>
       </span>
     </div>
-    <% unless user_signed_in? &&  @item.buyer.present? %>
+    <% if user_signed_in? && @item.buyer.presence %>
       <% if current_user.id == @item.user_id %>
         <%= link_to "商品の編集", edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class="or-text">or</p>
