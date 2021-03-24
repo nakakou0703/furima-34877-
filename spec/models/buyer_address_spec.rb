@@ -23,57 +23,57 @@ RSpec.describe BuyerAddress, type: :model do
       it 'クレジットカード情報は必須であり、尚且つ正しいクレジットカードの情報で無いときは決済できない' do
         @buyer_address.token = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Token can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("クレジットカード情報を入力してください")
       end
       it '郵便番号は必須である' do
         @buyer_address.postal_code = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Postal code can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("郵便番号を入力してください")
       end
       it '郵便番号はハイフンが必須である' do
         @buyer_address.postal_code = '0000000'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Postal code is invalid")
+        expect(@buyer_address.errors.full_messages).to include("郵便番号は不正な値です")
       end
       it '都道府県は必須である' do
         @buyer_address.source_id = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Source can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("都道府県を入力してください")
       end
       it '市区町村は必須である' do
         @buyer_address.municipality = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Municipality can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("市区町村を入力してください")
       end
       it '番地は必須である' do
         @buyer_address.address = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Address can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("番地を入力してください")
       end 
       it '電話番号は必須である' do
         @buyer_address.phone_number = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("電話番号を入力してください")
       end
       it '電話番号は11桁以内' do
         @buyer_address.phone_number = '000000000000'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@buyer_address.errors.full_messages).to include("電話番号は不正な値です")
       end
       it '電話番号は数値のみ' do
         @buyer_address.phone_number = 'aaaaaaaaaaa'
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@buyer_address.errors.full_messages).to include("電話番号は不正な値です")
       end
       it 'user_idは必須である' do
         @buyer_address.user_id = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("PUser can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("Userを入力してください")
       end
-      it 'user_idは必須である' do
+      it 'item_idは必須である' do
         @buyer_address.item_id = ''
         @buyer_address.valid?
-        expect(@buyer_address.errors.full_messages).to include("PItem can't be blank")
+        expect(@buyer_address.errors.full_messages).to include("Itemを入力してください")
       end
     end
   end
